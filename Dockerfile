@@ -9,6 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && useradd --uid 10001 --create-home beach
 COPY app.py configuration.py beaches.example.json ./
 COPY templates ./templates
+COPY static ./static
 USER beach
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \

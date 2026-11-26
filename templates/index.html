@@ -13,6 +13,9 @@
 >
 
 <title>Beach Conditions</title>
+<meta name="theme-color" content="#00242d">
+<link rel="icon" href="/static/atria/atria-rune.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/atria/atria.css?v=atria-20261126">
 
 <style>
 
@@ -26,9 +29,9 @@
         padding: 0;
         width: 100%;
         min-height: 100%;
-        font-family: Arial, sans-serif;
-        background: #111827;
-        color: #f9fafb;
+        font-family: var(--atria-font);
+        background: var(--solar-bg);
+        color: var(--solar-emphasis);
     }
 
     body {
@@ -60,7 +63,7 @@
 
     .updated {
         margin-top: 3px;
-        color: #9ca3af;
+        color: var(--solar-text);
         font-size: 12px;
     }
 
@@ -80,8 +83,8 @@
         border: 0;
         border-radius: 8px;
 
-        background: #374151;
-        color: #f9fafb;
+        background: var(--solar-inset);
+        color: var(--solar-emphasis);
 
         font-size: 20px;
         text-decoration: none;
@@ -90,7 +93,7 @@
     }
 
     .header-button:hover {
-        background: #4b5563;
+        background: var(--solar-hover);
     }
 
 
@@ -99,7 +102,7 @@
        ================================================== */
 
     .box {
-        background: #1f2937;
+        background: var(--solar-card);
         border-radius: 12px;
         padding: 12px;
         margin-bottom: 12px;
@@ -108,7 +111,7 @@
     .box-title {
         font-size: 14px;
         font-weight: bold;
-        color: #d1d5db;
+        color: var(--solar-text);
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-bottom: 10px;
@@ -127,13 +130,13 @@
 
     .tide-current,
     .tide-event {
-        background: #111827;
+        background: var(--solar-bg);
         border-radius: 8px;
         padding: 10px;
     }
 
     .tide-label {
-        color: #9ca3af;
+        color: var(--solar-text);
         font-size: 11px;
         text-transform: uppercase;
         margin-bottom: 4px;
@@ -145,7 +148,7 @@
     }
 
     .tide-sub {
-        color: #d1d5db;
+        color: var(--solar-text);
         font-size: 12px;
         margin-top: 3px;
     }
@@ -162,7 +165,7 @@
     }
 
     .tide-event .height {
-        color: #9ca3af;
+        color: var(--solar-text);
         font-size: 12px;
         margin-top: 2px;
     }
@@ -185,7 +188,7 @@
     .beach-table th {
         padding: 7px 4px;
 
-        color: #9ca3af;
+        color: var(--solar-text);
 
         font-size: 10px;
         font-weight: normal;
@@ -193,7 +196,7 @@
         text-transform: uppercase;
         text-align: center;
 
-        border-bottom: 1px solid #374151;
+        border-bottom: 1px solid var(--solar-inset);
     }
 
     .beach-table th:first-child {
@@ -223,7 +226,7 @@
 
         text-align: center;
 
-        border-bottom: 1px solid #374151;
+        border-bottom: 1px solid var(--solar-inset);
 
         font-size: 14px;
 
@@ -246,7 +249,7 @@
     .location-type {
         display: block;
 
-        color: #6b7280;
+        color: var(--solar-muted);
 
         font-size: 9px;
 
@@ -284,7 +287,7 @@
        ================================================== */
 
     .best-value {
-        color: #4ade80 !important;
+        color: var(--solar-success-text) !important;
         font-weight: bold;
     }
 
@@ -294,7 +297,7 @@
        ================================================== */
 
     .error {
-        color: #f87171;
+        color: var(--solar-danger-text);
     }
 
 
@@ -357,6 +360,18 @@
         }
     }
 
+
+.header { flex-wrap: wrap; gap: 14px; }
+.header > div:first-child { min-width: 0; }
+.title { color: var(--solar-cyan); font-weight: 600; }
+.header .atria-signature { margin-top: 5px; }
+.box { border: 1px solid var(--solar-border-soft); }
+.box-title { color: var(--solar-cyan); }
+.tide-event { background: var(--solar-inset); border: 1px solid var(--solar-border-soft); }
+.beach-table th, .beach-table td { border-color: var(--solar-border-soft); }
+.location, .tide-main, .tide-event .time, .air, .water, .waves { color: var(--solar-emphasis); }
+.header-button { border: 1px solid var(--solar-border-soft); }
+.header-button:hover { border-color: var(--solar-cyan); }
 </style>
 
 </head>
@@ -377,6 +392,8 @@
         <div class="title">
             🏖️ Beach Conditions
         </div>
+
+        <a class="atria-signature" href="{{ home_url or '/' }}" aria-label="Part of Atria — open the portal"><span class="atria-signature__label">Part of</span><img class="atria-signature__rune" src="/static/atria/atria-rune.svg" width="20" height="24" alt=""><span class="atria-signature__wordmark">atria</span></a>
 
         <div
             id="status"

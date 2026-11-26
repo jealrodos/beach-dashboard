@@ -1,0 +1,91 @@
+/* Atria v1: the Solarized dark palette used by the household portal. */
+@font-face {
+  font-family: "Atria Wordmark";
+  src: url("cinzel-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --solar-bg: #00242d;
+  --solar-card: #052d37;
+  --solar-inset: #0a3640;
+  --solar-resource: #08313b;
+  --solar-hover: #0b3943;
+  --solar-border: #486b72;
+  --solar-border-soft: #244751;
+  --solar-text: #93a1a1;
+  --solar-muted: #839496;
+  --solar-emphasis: #eee8d5;
+  --solar-cyan: #2aa198;
+  --solar-blue: #268bd2;
+  --solar-green: #859900;
+  --solar-yellow: #b58900;
+  --solar-orange: #cb4b16;
+  --solar-red: #dc322f;
+  --solar-magenta: #d33682;
+  --solar-violet: #6c71c4;
+  --solar-success-bg: #1a3024;
+  --solar-success-text: #b5bd68;
+  --solar-warning-bg: #352f1c;
+  --solar-warning-text: #dec477;
+  --solar-danger-bg: #351b23;
+  --solar-danger-text: #f09b90;
+  --solar-info-bg: #123747;
+  --solar-info-text: #9bc6db;
+  --solar-violet-bg: #292c42;
+  --solar-violet-text: #bdbee7;
+  --solar-magenta-bg: #382638;
+  --solar-magenta-text: #e0a8c9;
+  --atria-font: "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --atria-radius: 12px;
+}
+
+html, body {
+  background-color: var(--solar-bg);
+  color: var(--solar-text);
+  font-family: var(--atria-font);
+  scrollbar-color: var(--solar-border) var(--solar-bg);
+}
+
+::selection { background: #15535b; color: var(--solar-emphasis); }
+:is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--solar-cyan);
+  outline-offset: 3px;
+}
+input, select, textarea { accent-color: var(--solar-cyan); }
+
+.atria-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  flex-shrink: 0;
+  width: fit-content;
+  color: var(--solar-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+.atria-signature__label {
+  font-family: var(--atria-font);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.atria-signature__rune { width: 20px; height: 24px; display: block; flex-shrink: 0; }
+.atria-signature__wordmark {
+  font-family: "Atria Wordmark", Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  color: var(--solar-emphasis);
+}
+.atria-signature:hover .atria-signature__wordmark { color: var(--solar-cyan); }
+.atria-signature:hover { color: var(--solar-text); }
+@media (prefers-reduced-motion: reduce) {
+  .atria-signature { transition: none; }
+}
