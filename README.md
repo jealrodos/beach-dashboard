@@ -7,6 +7,9 @@ water-temperature sources into one compact screen. It was developed with AI
 assistance for a personal homelab and is part of the Atria ecosystem. The
 interface shares Atria's Solarized dark theme, bold Othala rune and
 self-hosted lowercase Josefin Sans wordmark. The font licence is included in `static/atria`.
+The cream **beachwatch** title uses heavier “beach” and lighter “watch”, with
+the parent signature on the right. The updated timestamp sits below the table
+at the bottom right. See the [brand specifications](docs/BRAND.md).
 
 The repository contains the authored application, interface, configuration
 examples and deployment template. Frameworks and external data services remain
