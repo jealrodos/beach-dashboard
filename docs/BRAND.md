@@ -15,6 +15,8 @@ Product names use Segoe UI / Inter / system-ui, weights 650 and 350, line-height
 1.2 and tracking `-.04em`. Sizes are 24px desktop, 20px at ≤600px and 18px at
 ≤380px. Headers align the product left and signature right; card radius is 12px.
 The Updated timestamp sits below the table at the bottom right in normal flow.
+The browser tab reads `a t r i a   |   BeachWatch`, with three non-breaking
+spaces on each side of the pipe to retain its spacing in browser chrome.
 
 | Role | Hex |
 | --- | --- |
