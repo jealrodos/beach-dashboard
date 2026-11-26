@@ -1,9 +1,9 @@
-/* Atria v1: the Solarized dark palette used by the household portal. */
+/* Atria: shared Solarized theme, lowercase wordmark and bold Othala signature. */
 @font-face {
   font-family: "Atria Wordmark";
-  src: url("cinzel-latin.woff2") format("woff2");
+  src: url("josefin-sans-latin.woff2") format("woff2");
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -74,18 +74,61 @@ input, select, textarea { accent-color: var(--solar-cyan); }
   font-size: 9px;
   font-weight: 500;
   letter-spacing: .12em;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 .atria-signature__rune { width: 20px; height: 24px; display: block; flex-shrink: 0; }
 .atria-signature__wordmark {
-  font-family: "Atria Wordmark", Georgia, serif;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: .16em;
+  font-family: "Atria Wordmark", "Josefin Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: lowercase;
+  font-variant: normal;
   color: var(--solar-emphasis);
 }
 .atria-signature:hover .atria-signature__wordmark { color: var(--solar-cyan); }
 .atria-signature:hover { color: var(--solar-text); }
+
+/* Every product places the same parent signature to the right of its title. */
+.atria-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+  min-height: 52px;
+  margin: 0 0 4px;
+  padding: 6px 2px;
+}
+.atria-product-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  min-width: 0;
+  color: var(--solar-cyan);
+  font-family: var(--atria-font);
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -.04em;
+}
+.atria-product-title .brand-light { font-weight: 350; }
+.atria-product-title .product-mark { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.atria-header-actions { display: flex; align-items: center; gap: 16px; }
+@media (max-width: 600px) {
+  .atria-header { gap: 10px; }
+  .atria-product-title { font-size: 20px; gap: 6px; }
+  .atria-product-title .product-mark { font-size: 21px; }
+  .atria-signature { gap: 5px; }
+  .atria-signature__label { font-size: 9px; letter-spacing: .08em; }
+  .atria-signature__wordmark { font-size: 16px; }
+  .atria-header-actions { gap: 10px; }
+}
+@media (max-width: 380px) {
+  .atria-product-title { font-size: 18px; }
+  .atria-product-title .product-mark { font-size: 20px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .atria-signature { transition: none; }
 }

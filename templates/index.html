@@ -12,10 +12,10 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Beach Conditions</title>
+<title>BeachWatch</title>
 <meta name="theme-color" content="#00242d">
-<link rel="icon" href="/static/atria/atria-rune.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/static/atria/atria.css?v=atria-20261126">
+<link rel="icon" href="/static/atria/atria-rune.svg?v=atria-othala-20261126" type="image/svg+xml">
+<link rel="stylesheet" href="/static/atria/atria.css?v=atria-othala-20261126">
 
 <style>
 
@@ -364,7 +364,7 @@
 .header { flex-wrap: wrap; gap: 14px; }
 .header > div:first-child { min-width: 0; }
 .title { color: var(--solar-cyan); font-weight: 600; }
-.header .atria-signature { margin-top: 5px; }
+.header .atria-signature { margin: 0; }
 .box { border: 1px solid var(--solar-border-soft); }
 .box-title { color: var(--solar-cyan); }
 .tide-event { background: var(--solar-inset); border: 1px solid var(--solar-border-soft); }
@@ -372,6 +372,18 @@
 .location, .tide-main, .tide-event .time, .air, .water, .waves { color: var(--solar-emphasis); }
 .header-button { border: 1px solid var(--solar-border-soft); }
 .header-button:hover { border-color: var(--solar-cyan); }
+
+    body { padding: 14px; }
+    .header { flex-wrap: nowrap; gap: 16px; padding: 6px 2px; margin: 0 0 4px; }
+    .title { font-size: 24px; font-weight: 650; line-height: 1.2; letter-spacing: -.04em; }
+    .beach-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 2px 12px; }
+    .beach-toolbar .updated { margin: 0; }
+    .box { border-radius: var(--atria-radius); }
+    @media (max-width: 600px) {
+        body { padding: 10px; }
+        .header { gap: 10px; }
+        .title { font-size: 20px; }
+    }
 </style>
 
 </head>
@@ -385,50 +397,13 @@
      HEADER
      ================================================== -->
 
-<div class="header">
-
-    <div>
-
-        <div class="title">
-            🏖️ Beach Conditions
-        </div>
-
-        <a class="atria-signature" href="{{ home_url or '/' }}" aria-label="Part of Atria — open the portal"><span class="atria-signature__label">Part of</span><img class="atria-signature__rune" src="/static/atria/atria-rune.svg" width="20" height="24" alt=""><span class="atria-signature__wordmark">atria</span></a>
-
-        <div
-            id="status"
-            class="updated"
-        >
-            Loading conditions...
-        </div>
-
-    </div>
-
-
-    <div class="header-buttons">
-
-        <a
-            class="header-button"
-            href="{{ home_url }}"
-            title="Home"
-            aria-label="Home"
-        >
-            🏠
-        </a>
-
-        <button
-            class="header-button"
-            onclick="toggleFullscreen()"
-            title="Kiosk mode"
-            aria-label="Fullscreen"
-        >
-            ⛶
-        </button>
-
-    </div>
-
+<header class="header atria-header">
+  <h1 class="title atria-product-title"><span class="product-mark" aria-hidden="true">🏖️</span><span>beach<span class="brand-light">watch</span></span></h1>
+  <a class="atria-signature" href="{{ home_url or '/' }}" aria-label="Part of Atria — open the portal"><span class="atria-signature__label">part of</span><img class="atria-signature__rune" src="/static/atria/atria-rune.svg?v=atria-othala-20261126" width="20" height="24" alt=""><span class="atria-signature__wordmark">atria</span></a>
+</header>
+<div class="beach-toolbar">
+  <div id="status" class="updated">Loading conditions...</div>
 </div>
-
 
 <!-- ==================================================
      TIDE

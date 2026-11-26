@@ -1,12 +1,12 @@
-# Beach Conditions
+# BeachWatch
 
 [![Validate source](https://github.com/jealrodos/beach-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/jealrodos/beach-dashboard/actions/workflows/ci.yml)
 
 A self-hosted dashboard that brings beach weather, tides, wind, waves and
 water-temperature sources into one compact screen. It was developed with AI
 assistance for a personal homelab and is part of the Atria ecosystem. The
-interface shares Atria's Solarized dark theme, small architectural rune and
-self-hosted Cinzel wordmark. The font licence is included in `static/atria`.
+interface shares Atria's Solarized dark theme, bold Othala rune and
+self-hosted lowercase Josefin Sans wordmark. The font licence is included in `static/atria`.
 
 The repository contains the authored application, interface, configuration
 examples and deployment template. Frameworks and external data services remain
@@ -26,7 +26,7 @@ dashboard should be reachable from other devices.
 To use your own locations, copy `beaches.example.json` to `beaches.local.json`
 and set `BEACH_CONFIG_PATH=./beaches.local.json` in `.env`. Personal locations and
 the actual home-navigation URL stay outside Git. Restart the application after
-changing location configuration. `HOME_URL` supplies the optional home link.
+changing location configuration. `HOME_URL` supplies the destination of the Atria signature.
 
 ## Data flow
 

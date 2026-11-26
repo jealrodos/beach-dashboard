@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 ARG ATRIA_GIT_SHA=untracked
-LABEL org.opencontainers.image.title="Beach Conditions" \
+LABEL org.opencontainers.image.title="BeachWatch" \
       org.opencontainers.image.revision="${ATRIA_GIT_SHA}"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 TZ=Europe/Lisbon
 WORKDIR /app
