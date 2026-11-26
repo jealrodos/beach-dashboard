@@ -1,5 +1,7 @@
 # Beach Conditions
 
+[![Validate source](https://github.com/jealrodos/beach-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/jealrodos/beach-dashboard/actions/workflows/ci.yml)
+
 A self-hosted dashboard that brings beach weather, tides, wind, waves and
 water-temperature sources into one compact screen. It was developed with AI
 assistance for a personal homelab and is part of the emerging Atria ecosystem.
