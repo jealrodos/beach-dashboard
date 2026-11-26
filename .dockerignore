@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+.venv
+venv
+__pycache__
+private
+backups
+artifacts
+beaches.production.json
+beaches.local.json
+tests

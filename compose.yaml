@@ -1,0 +1,31 @@
+name: beach-dashboard
+services:
+  beach-dashboard:
+    build:
+      context: .
+      args:
+        ATRIA_GIT_SHA: ${ATRIA_GIT_SHA:-untracked}
+    image: atria/beach-dashboard:${ATRIA_GIT_SHA:-dev}
+    container_name: beach-dashboard
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-8787}:8000"
+    environment:
+      TZ: Europe/Lisbon
+      BEACH_CONFIG_FILE: /app/config/beaches.json
+      HOME_URL: ${HOME_URL:-/}
+      CACHE_SECONDS: ${CACHE_SECONDS:-60}
+      ATRIA_GIT_SHA: ${ATRIA_GIT_SHA:-untracked}
+    volumes:
+      - ${BEACH_CONFIG_PATH:-./beaches.example.json}:/app/config/beaches.json:ro
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.75
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"

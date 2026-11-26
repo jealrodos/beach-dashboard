@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Beach Conditions</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        font-family: Arial, sans-serif;
+        background: #111827;
+        color: #f9fafb;
+    }
+
+    body {
+        padding: 14px;
+    }
+
+    .dashboard {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+
+    /* ==================================================
+       HEADER
+       ================================================== */
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .updated {
+        margin-top: 3px;
+        color: #9ca3af;
+        font-size: 12px;
+    }
+
+    .header-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .header-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 38px;
+        height: 38px;
+
+        border: 0;
+        border-radius: 8px;
+
+        background: #374151;
+        color: #f9fafb;
+
+        font-size: 20px;
+        text-decoration: none;
+
+        cursor: pointer;
+    }
+
+    .header-button:hover {
+        background: #4b5563;
+    }
+
+
+    /* ==================================================
+       GENERIC BOX
+       ================================================== */
+
+    .box {
+        background: #1f2937;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .box-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #d1d5db;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 10px;
+    }
+
+
+    /* ==================================================
+       TIDE
+       ================================================== */
+
+    .tide {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr 1fr;
+        gap: 8px;
+    }
+
+    .tide-current,
+    .tide-event {
+        background: #111827;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .tide-label {
+        color: #9ca3af;
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .tide-main {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .tide-sub {
+        color: #d1d5db;
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    .tide-event .type {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .tide-event .time {
+        font-size: 19px;
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+    .tide-event .height {
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+
+    /* ==================================================
+       BEACH TABLE
+       ================================================== */
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .beach-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .beach-table th {
+        padding: 7px 4px;
+
+        color: #9ca3af;
+
+        font-size: 10px;
+        font-weight: normal;
+
+        text-transform: uppercase;
+        text-align: center;
+
+        border-bottom: 1px solid #374151;
+    }
+
+    .beach-table th:first-child {
+        text-align: left;
+        width: 29%;
+    }
+
+    .beach-table th:nth-child(2) {
+        width: 12%;
+    }
+
+    .beach-table th:nth-child(3),
+    .beach-table th:nth-child(4) {
+        width: 13%;
+    }
+
+    .beach-table th:nth-child(5) {
+        width: 18%;
+    }
+
+    .beach-table th:nth-child(6) {
+        width: 15%;
+    }
+
+    .beach-table td {
+        padding: 10px 4px;
+
+        text-align: center;
+
+        border-bottom: 1px solid #374151;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+    }
+
+    .beach-table tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .beach-table td:first-child {
+        text-align: left;
+    }
+
+    .location {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .location-type {
+        display: block;
+
+        color: #6b7280;
+
+        font-size: 9px;
+
+        margin-top: 2px;
+
+        text-transform: uppercase;
+    }
+
+    .weather-icon {
+        font-size: 22px;
+    }
+
+    .air {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .water {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .wind {
+        font-size: 13px;
+    }
+
+    .waves {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    /* ==================================================
+       BEST VALUE
+       ================================================== */
+
+    .best-value {
+        color: #4ade80 !important;
+        font-weight: bold;
+    }
+
+
+    /* ==================================================
+       ERROR
+       ================================================== */
+
+    .error {
+        color: #f87171;
+    }
+
+
+    /* ==================================================
+       MOBILE / PORTRAIT
+       ================================================== */
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 9px;
+        }
+
+        .title {
+            font-size: 21px;
+        }
+
+        .box {
+            padding: 9px;
+            margin-bottom: 9px;
+        }
+
+        .tide {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .tide-current {
+            grid-column: 1 / -1;
+        }
+
+        .beach-table th {
+            font-size: 9px;
+        }
+
+        .beach-table td {
+            padding: 9px 2px;
+            font-size: 13px;
+        }
+
+        .location {
+            font-size: 13px;
+        }
+
+        .weather-icon {
+            font-size: 20px;
+        }
+
+        .air {
+            font-size: 15px;
+        }
+
+        .wind {
+            font-size: 12px;
+        }
+
+        .header-button {
+            width: 36px;
+            height: 36px;
+            font-size: 19px;
+        }
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+
+<!-- ==================================================
+     HEADER
+     ================================================== -->
+
+<div class="header">
+
+    <div>
+
+        <div class="title">
+            🏖️ Beach Conditions
+        </div>
+
+        <div
+            id="status"
+            class="updated"
+        >
+            Loading conditions...
+        </div>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+        <a
+            class="header-button"
+            href="{{ home_url }}"
+            title="Home"
+            aria-label="Home"
+        >
+            🏠
+        </a>
+
+        <button
+            class="header-button"
+            onclick="toggleFullscreen()"
+            title="Kiosk mode"
+            aria-label="Fullscreen"
+        >
+            ⛶
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     TIDE
+     ================================================== -->
+
+<div class="box">
+
+    <div class="box-title">
+        🌊 Tide · Porto / Foz
+    </div>
+
+
+    <div class="tide">
+
+
+        <div class="tide-current">
+
+            <div class="tide-label">
+                Current
+            </div>
+
+            <div
+                class="tide-main"
+                id="tide-state"
+            >
+                —
+            </div>
+
+            <div
+                class="tide-sub"
+                id="tide-current-height"
+            >
+                —
+            </div>
+
+        </div>
+
+
+        <div class="tide-event">
+
+            <div class="tide-label">
+                Next
+            </div>
+
+            <div
+                class="type"
+                id="tide-next-type"
+            >
+                —
+            </div>
+
+            <div
+                class="time"
+                id="tide-next-time"
+            >
+                —
+            </div>
+
+            <div
+                class="height"
+                id="tide-next-height"
+            >
+                —
+            </div>
+
+        </div>
+
+
+        <div class="tide-event">
+
+            <div class="tide-label">
+                Following
+            </div>
+
+            <div
+                class="type"
+                id="tide-following-type"
+            >
+                —
+            </div>
+
+            <div
+                class="time"
+                id="tide-following-time"
+            >
+                —
+            </div>
+
+            <div
+                class="height"
+                id="tide-following-height"
+            >
+                —
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     BEACH CONDITIONS
+     ================================================== -->
+
+<div class="box">
+
+    <div class="table-wrapper">
+
+        <table class="beach-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Forecast
+                    </th>
+
+                    <th>
+                        Air
+                    </th>
+
+                    <th>
+                        Water
+                    </th>
+
+                    <th>
+                        Wind
+                    </th>
+
+                    <th>
+                        Waves
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="beaches"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<script>
+
+
+    // ==================================================
+    // WEATHER ICONS
+    // ==================================================
+
+    function getWeather(code) {
+
+        const conditions = {
+
+            0:  ["☀️", "Clear"],
+            1:  ["🌤️", "Mainly clear"],
+            2:  ["⛅", "Partly cloudy"],
+            3:  ["☁️", "Overcast"],
+
+            45: ["🌫️", "Fog"],
+            48: ["🌫️", "Fog"],
+
+            51: ["🌦️", "Drizzle"],
+            53: ["🌦️", "Drizzle"],
+            55: ["🌧️", "Drizzle"],
+
+            61: ["🌦️", "Rain"],
+            63: ["🌧️", "Rain"],
+            65: ["🌧️", "Heavy rain"],
+
+            71: ["🌨️", "Snow"],
+            73: ["🌨️", "Snow"],
+            75: ["❄️", "Heavy snow"],
+
+            80: ["🌦️", "Showers"],
+            81: ["🌧️", "Showers"],
+            82: ["⛈️", "Heavy showers"],
+
+            85: ["🌨️", "Snow showers"],
+            86: ["🌨️", "Snow showers"],
+
+            95: ["⛈️", "Thunderstorm"],
+            96: ["⛈️", "Thunderstorm"],
+            99: ["⛈️", "Thunderstorm"]
+
+        };
+
+        return conditions[code]
+            || ["❓", "Unknown"];
+    }
+
+
+    // ==================================================
+    // WIND DIRECTION
+    // ==================================================
+
+    function windDirection(degrees) {
+
+        if (
+            degrees === undefined ||
+            degrees === null
+        ) {
+            return "—";
+        }
+
+        const directions = [
+            "N",
+            "NE",
+            "E",
+            "SE",
+            "S",
+            "SW",
+            "W",
+            "NW"
+        ];
+
+        const index =
+            Math.round(
+                degrees / 45
+            ) % 8;
+
+        return directions[index];
+    }
+
+
+    // ==================================================
+    // SHORT BEACH NAMES
+    // ==================================================
+
+    function shortName(name) {
+
+        const names = {
+
+            "Praia de Liméns":
+                "Liméns",
+
+            "Barragem de Azibo":
+                "Azibo",
+
+            "Póvoa de Varzim":
+                "Póvoa",
+
+            "Leça da Palmeira":
+                "Leça",
+
+            "Foz do Douro":
+                "Foz",
+
+            "Douro / Porto":
+                "Douro",
+
+            "Cabedelo do Douro":
+                "Cabedelo",
+
+            "Praia da Aguda":
+                "Aguda",
+
+            "Torrão do Lameiro":
+                "Torrão"
+
+        };
+
+        return names[name] || name;
+    }
+
+
+    // ==================================================
+    // LOCATION TYPE
+    // ==================================================
+
+    function locationType(type) {
+
+        if (type === "douro") {
+            return "Douro";
+        }
+
+        if (type === "lake") {
+            return "Azibo";
+        }
+
+        return "Atlantic";
+    }
+
+
+    // ==================================================
+    // TIDE TIME
+    // ==================================================
+
+    function formatTideTime(value) {
+
+        if (!value) {
+            return "—";
+        }
+
+        try {
+
+            return new Date(value)
+                .toLocaleTimeString(
+                    "pt-PT",
+                    {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }
+                );
+
+        } catch {
+
+            return "—";
+        }
+    }
+
+
+    // ==================================================
+    // TIDE TYPE
+    // ==================================================
+
+    function formatTideType(type) {
+
+        if (!type) {
+            return "—";
+        }
+
+        return type === "high"
+            ? "HIGH TIDE"
+            : "LOW TIDE";
+    }
+
+
+    // ==================================================
+    // RENDER TIDE
+    // ==================================================
+
+    function renderTide(tide) {
+
+        if (!tide) {
+            return;
+        }
+
+        const state =
+            tide.state || "unavailable";
+
+        const icon =
+            tide.state_icon || "—";
+
+        document.getElementById(
+            "tide-state"
+        ).textContent =
+            `${icon} ${state.toUpperCase()}`;
+
+
+        const currentHeight =
+            document.getElementById(
+                "tide-current-height"
+            );
+
+
+        if (
+            tide.current_height !== null &&
+            tide.current_height !== undefined
+        ) {
+
+            currentHeight.textContent =
+                `${Number(
+                    tide.current_height
+                ).toFixed(2)} m MSL`;
+
+        } else {
+
+            currentHeight.textContent =
+                state === "rising"
+                    ? "Rising toward next high"
+                    : state === "falling"
+                        ? "Falling toward next low"
+                        : "Tide state unavailable";
+        }
+
+
+        // ==================================================
+        // NEXT
+        // ==================================================
+
+        const next = tide.next;
+
+        if (next) {
+
+            document.getElementById(
+                "tide-next-type"
+            ).textContent =
+                formatTideType(
+                    next.type
+                );
+
+            document.getElementById(
+                "tide-next-time"
+            ).textContent =
+                formatTideTime(
+                    next.time
+                );
+
+            document.getElementById(
+                "tide-next-height"
+            ).textContent =
+                `${Number(
+                    next.height
+                ).toFixed(2)} m`;
+
+        } else {
+
+            document.getElementById(
+                "tide-next-type"
+            ).textContent = "—";
+
+            document.getElementById(
+                "tide-next-time"
+            ).textContent = "—";
+
+            document.getElementById(
+                "tide-next-height"
+            ).textContent = "—";
+        }
+
+
+        // ==================================================
+        // FOLLOWING
+        // ==================================================
+
+        const following =
+            tide.following;
+
+        if (following) {
+
+            document.getElementById(
+                "tide-following-type"
+            ).textContent =
+                formatTideType(
+                    following.type
+                );
+
+            document.getElementById(
+                "tide-following-time"
+            ).textContent =
+                formatTideTime(
+                    following.time
+                );
+
+            document.getElementById(
+                "tide-following-height"
+            ).textContent =
+                `${Number(
+                    following.height
+                ).toFixed(2)} m`;
+
+        } else {
+
+            document.getElementById(
+                "tide-following-type"
+            ).textContent = "—";
+
+            document.getElementById(
+                "tide-following-time"
+            ).textContent = "—";
+
+            document.getElementById(
+                "tide-following-height"
+            ).textContent = "—";
+        }
+
+    }
+
+
+    // ==================================================
+    // VALUE FORMATTING
+    //
+    // Display the real value to two decimal places.
+    // This does NOT affect best-value comparisons.
+    // ==================================================
+
+    function formatValue(value) {
+
+        if (
+            value === undefined ||
+            value === null ||
+            !Number.isFinite(Number(value))
+        ) {
+            return "—";
+        }
+
+        return Number(value).toFixed(2);
+    }
+
+
+    // ==================================================
+    // FIND BEST VALUES
+    //
+    // Uses the raw API values.
+    // All genuinely equal values are highlighted.
+    // ==================================================
+
+    function getBestValues(beaches) {
+
+        const valid = value =>
+            typeof value === "number" &&
+            Number.isFinite(value);
+
+
+        // ==================================================
+        // AIR
+        // ==================================================
+
+        const airValues = beaches
+            .map(
+                beach =>
+                    beach.weather?.temperature_2m
+            )
+            .filter(valid);
+
+
+        // ==================================================
+        // WATER
+        // ==================================================
+
+        const waterValues = beaches
+            .map(beach => {
+
+                if (
+                    beach.type === "douro" ||
+                    beach.type === "lake" ||
+                    beach.type === "limens"
+                ) {
+
+                    return beach
+                        .water_temperature
+                        ?.value;
+                }
+
+                return beach
+                    .marine
+                    ?.sea_surface_temperature;
+
+            })
+            .filter(valid);
+
+
+        // ==================================================
+        // WIND
+        // ==================================================
+
+        const windValues = beaches
+            .map(
+                beach =>
+                    beach.weather?.wind_speed_10m
+            )
+            .filter(valid);
+
+
+        // ==================================================
+        // WAVES
+        // ==================================================
+
+        const waveValues = beaches
+            .map(
+                beach =>
+                    beach.marine?.wave_height
+            )
+            .filter(valid);
+
+
+        return {
+
+            // Higher air temperature is better.
+            air:
+                airValues.length
+                    ? Math.max(...airValues)
+                    : null,
+
+            // Higher water temperature is better.
+            water:
+                waterValues.length
+                    ? Math.max(...waterValues)
+                    : null,
+
+            // Lower wind is better.
+            wind:
+                windValues.length
+                    ? Math.min(...windValues)
+                    : null,
+
+            // Lower waves are better.
+            waves:
+                waveValues.length
+                    ? Math.min(...waveValues)
+                    : null
+
+        };
+    }
+
+
+    // ==================================================
+    // VALUE COMPARISON
+    //
+    // Compare the actual underlying values.
+    // Do NOT compare rounded display values.
+    // ==================================================
+
+    function isBest(value, best) {
+
+        if (
+            value === undefined ||
+            value === null ||
+            best === null ||
+            best === undefined
+        ) {
+            return false;
+        }
+
+        return Number(value) === Number(best);
+    }
+
+
+    // ==================================================
+    // RENDER BEACHES
+    // ==================================================
+
+    function renderBeaches(beaches) {
+
+        const container =
+            document.getElementById(
+                "beaches"
+            );
+
+
+        container.innerHTML = "";
+
+
+        const best =
+            getBestValues(beaches);
+
+
+        beaches.forEach(
+            beach => {
+
+                const weather =
+                    beach.weather || {};
+
+                const marine =
+                    beach.marine || {};
+
+                const water =
+                    beach.water_temperature || {};
+
+
+                const [
+                    weatherIcon,
+                    weatherText
+                ] = getWeather(
+                    weather.weather_code
+                );
+
+
+                // ==================================================
+                // AIR
+                // ==================================================
+
+                const airValue =
+                    weather.temperature_2m;
+
+
+                const airClass =
+                    isBest(
+                        airValue,
+                        best.air
+                    )
+                        ? "best-value"
+                        : "";
+
+
+                // ==================================================
+                // WATER
+                // ==================================================
+
+                let waterValue = null;
+
+
+                if (
+                    beach.type === "douro" ||
+                    beach.type === "lake" ||
+                    beach.type === "limens"
+                ) {
+
+                    waterValue =
+                        water.value;
+
+                } else {
+
+                    waterValue =
+                        marine
+                            .sea_surface_temperature;
+                }
+
+
+                const waterClass =
+                    isBest(
+                        waterValue,
+                        best.water
+                    )
+                        ? "best-value"
+                        : "";
+
+
+                let waterTitle = "";
+
+
+                if (
+                    beach.type === "douro" ||
+                    beach.type === "lake" ||
+                    beach.type === "limens"
+                ) {
+
+                    waterTitle =
+                        water.source || "";
+                }
+
+
+                // ==================================================
+                // WIND
+                // ==================================================
+
+                const windValue =
+                    weather.wind_speed_10m;
+
+
+                const windClass =
+                    isBest(
+                        windValue,
+                        best.wind
+                    )
+                        ? "best-value"
+                        : "";
+
+
+                let wind = "—";
+
+
+                if (
+                    windValue !== undefined &&
+                    windValue !== null
+                ) {
+
+                    wind =
+                        `${formatValue(
+                            windValue
+                        )} ${windDirection(
+                            weather.wind_direction_10m
+                        )}`;
+                }
+
+
+                // ==================================================
+                // WAVES
+                // ==================================================
+
+                const waveValue =
+                    marine.wave_height;
+
+
+                const waveClass =
+                    isBest(
+                        waveValue,
+                        best.waves
+                    )
+                        ? "best-value"
+                        : "";
+
+
+                let waves = "—";
+
+
+                if (
+                    waveValue !== undefined &&
+                    waveValue !== null
+                ) {
+
+                    waves =
+                        `${formatValue(
+                            waveValue
+                        )}m`;
+                }
+
+
+                // ==================================================
+                // ROW
+                // ==================================================
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <span class="location">
+                            ${shortName(
+                                beach.name
+                            )}
+                        </span>
+
+                        <span class="location-type">
+                            ${locationType(
+                                beach.type
+                            )}
+                        </span>
+
+                    </td>
+
+
+                    <td
+                        class="weather-icon"
+                        title="${weatherText}"
+                    >
+                        ${weatherIcon}
+                    </td>
+
+
+                    <td
+                        class="air ${airClass}"
+                    >
+                        ${
+                            airValue !== undefined &&
+                            airValue !== null
+                                ? `${formatValue(
+                                    airValue
+                                  )}°`
+                                : "—"
+                        }
+                    </td>
+
+
+                    <td
+                        class="water ${waterClass}"
+                        title="${waterTitle}"
+                    >
+                        ${
+                            waterValue !== undefined &&
+                            waterValue !== null
+                                ? `${formatValue(
+                                    waterValue
+                                  )}°`
+                                : "—"
+                        }
+                    </td>
+
+
+                    <td
+                        class="wind ${windClass}"
+                    >
+                        ${wind}
+                    </td>
+
+
+                    <td
+                        class="waves ${waveClass}"
+                    >
+                        ${waves}
+                    </td>
+
+                `;
+
+
+                container.appendChild(
+                    row
+                );
+
+            }
+        );
+    }
+
+
+    // ==================================================
+    // LOAD DASHBOARD
+    // ==================================================
+
+    async function loadDashboard() {
+
+        const status =
+            document.getElementById(
+                "status"
+            );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/beaches",
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            renderTide(
+                data.tide
+            );
+
+
+            renderBeaches(
+                data.beaches || []
+            );
+
+
+            status.textContent =
+                `Updated ${new Date()
+                    .toLocaleTimeString(
+                        "pt-PT",
+                        {
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    )}`;
+
+
+        } catch (error) {
+
+            console.error(
+                "Dashboard error:",
+                error
+            );
+
+
+            status.innerHTML =
+                `<span class="error">
+                    Unable to load conditions
+                </span>`;
+        }
+
+    }
+
+
+    // ==================================================
+    // FULLSCREEN
+    // ==================================================
+
+    function toggleFullscreen() {
+
+        if (
+            !document.fullscreenElement
+        ) {
+
+            document.documentElement
+                .requestFullscreen()
+                .catch(
+                    () => {}
+                );
+
+        } else {
+
+            document.exitFullscreen();
+        }
+    }
+
+
+    // ==================================================
+    // INITIAL LOAD
+    // ==================================================
+
+    loadDashboard();
+
+
+    // Refresh every 5 minutes.
+
+    setInterval(
+        loadDashboard,
+        5 * 60 * 1000
+    );
+
+
+</script>
+
+</body>
+
+</html>
+

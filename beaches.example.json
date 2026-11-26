@@ -1,0 +1,30 @@
+[
+  {
+    "id": "limens",
+    "name": "Praia de Liméns",
+    "lat": 42.2605556,
+    "lon": -8.8102778,
+    "type": "limens"
+  },
+  {
+    "id": "azibo",
+    "name": "Barragem de Azibo",
+    "lat": 41.555,
+    "lon": -6.9,
+    "type": "lake"
+  },
+  {
+    "id": "povoa",
+    "name": "Póvoa de Varzim",
+    "lat": 41.38,
+    "lon": -8.76,
+    "type": "sea"
+  },
+  {
+    "id": "douro",
+    "name": "Douro / Porto",
+    "lat": 41.139,
+    "lon": -8.5853,
+    "type": "douro"
+  }
+]
