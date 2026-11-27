@@ -10,6 +10,9 @@ self-hosted lowercase Josefin Sans wordmark. The font licence is included in `st
 The cream **beachwatch** title uses heavier “beach” and lighter “watch”, with
 the parent signature on the right. The updated timestamp sits below the table
 at the bottom right. See the [brand specifications](docs/BRAND.md).
+Its header uses the waves vector. `static/app-icons/beach` includes SVG/PNG
+favicons, an opaque Apple 180px PNG, 192/512px PWA icons and a standalone
+manifest. Links remain portable and served by this deployment.
 
 The repository contains the authored application, interface, configuration
 examples and deployment template. Frameworks and external data services remain
