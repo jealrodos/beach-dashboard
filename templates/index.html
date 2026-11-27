@@ -15,6 +15,7 @@
 <title>a t r i a&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;BeachWatch</title>
 <meta name="theme-color" content="#00242d">
 {% include 'app_icons.html' %}
+<link rel="stylesheet" href="/static/atria/ui-icons.css?v=49d4177ee9c2">
 <link rel="stylesheet" href="/static/atria/atria.css?v=atria-fab54d400661">
 
 <style>
@@ -416,7 +417,7 @@
 <div class="box">
 
     <div class="box-title">
-        🌊 Tide · Porto / Foz
+        <svg class="atria-ui-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="/static/atria/ui-icons.svg?v=49d4177ee9c2#waves"></use></svg> Tide · Porto / Foz
     </div>
 
 
@@ -578,41 +579,41 @@
 
         const conditions = {
 
-            0:  ["☀️", "Clear"],
-            1:  ["🌤️", "Mainly clear"],
-            2:  ["⛅", "Partly cloudy"],
-            3:  ["☁️", "Overcast"],
+            0:  ["sun", "Clear"],
+            1:  ["cloud-sun", "Mainly clear"],
+            2:  ["cloud-sun", "Partly cloudy"],
+            3:  ["cloud", "Overcast"],
 
-            45: ["🌫️", "Fog"],
-            48: ["🌫️", "Fog"],
+            45: ["cloud-fog", "Fog"],
+            48: ["cloud-fog", "Fog"],
 
-            51: ["🌦️", "Drizzle"],
-            53: ["🌦️", "Drizzle"],
-            55: ["🌧️", "Drizzle"],
+            51: ["cloud-sun-rain", "Drizzle"],
+            53: ["cloud-sun-rain", "Drizzle"],
+            55: ["cloud-rain", "Drizzle"],
 
-            61: ["🌦️", "Rain"],
-            63: ["🌧️", "Rain"],
-            65: ["🌧️", "Heavy rain"],
+            61: ["cloud-sun-rain", "Rain"],
+            63: ["cloud-rain", "Rain"],
+            65: ["cloud-rain", "Heavy rain"],
 
-            71: ["🌨️", "Snow"],
-            73: ["🌨️", "Snow"],
-            75: ["❄️", "Heavy snow"],
+            71: ["cloud-snow", "Snow"],
+            73: ["cloud-snow", "Snow"],
+            75: ["snowflake", "Heavy snow"],
 
-            80: ["🌦️", "Showers"],
-            81: ["🌧️", "Showers"],
-            82: ["⛈️", "Heavy showers"],
+            80: ["cloud-sun-rain", "Showers"],
+            81: ["cloud-rain", "Showers"],
+            82: ["cloud-lightning", "Heavy showers"],
 
-            85: ["🌨️", "Snow showers"],
-            86: ["🌨️", "Snow showers"],
+            85: ["cloud-snow", "Snow showers"],
+            86: ["cloud-snow", "Snow showers"],
 
-            95: ["⛈️", "Thunderstorm"],
-            96: ["⛈️", "Thunderstorm"],
-            99: ["⛈️", "Thunderstorm"]
+            95: ["cloud-lightning", "Thunderstorm"],
+            96: ["cloud-lightning", "Thunderstorm"],
+            99: ["cloud-lightning", "Thunderstorm"]
 
         };
 
         return conditions[code]
-            || ["❓", "Unknown"];
+            || ["circle-help", "Unknown"];
     }
 
 
@@ -1246,7 +1247,7 @@
                         class="weather-icon"
                         title="${weatherText}"
                     >
-                        ${weatherIcon}
+                        <svg class="atria-ui-icon" role="img" aria-label="${weatherText}" focusable="false" viewBox="0 0 24 24"><use href="/static/atria/ui-icons.svg?v=49d4177ee9c2#${weatherIcon}"></use></svg>
                     </td>
 
 

@@ -13,6 +13,9 @@ at the bottom right. See the [brand specifications](docs/BRAND.md).
 Its header uses the waves vector. `static/app-icons/beach` includes SVG/PNG
 favicons, an opaque Apple 180px PNG, 192/512px PWA icons and a standalone
 manifest. Links remain portable and served by this deployment.
+Weather and tide symbols also use the bundled Lucide outline sprite in
+`static/atria/ui-icons.svg`; its license is embedded in the file. Forecast
+descriptions and condition colors retain their existing behavior.
 
 The repository contains the authored application, interface, configuration
 examples and deployment template. Frameworks and external data services remain
