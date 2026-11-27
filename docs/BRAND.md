@@ -3,7 +3,8 @@
 BeachWatch uses a Solarized dark interface. Its product wordmark reads
 **beachwatch**, with heavier “beach” and lighter “watch”, in warm cream
 `#eee8d5`. The right header signature combines the quiet “part of” label, bold
-Othala rune and spaced lowercase Atria wordmark. `HOME_URL` configures its link.
+Othala rune and spaced lowercase Atria wordmark. Set `HOME_URL` to your Atria
+app directory so the signature returns to the full app collection.
 
 The rune uses SVG viewBox `0 0 32 44`, a 3.2-unit teal stroke, round caps and
 joins. Its header box is 20 × 24px, retaining intrinsic proportions. The Atria
